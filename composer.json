@@ -1,0 +1,16 @@
+{
+    "name": "amaitre/my-noise",
+    "description": "Listen music for free",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Hoax017",
+            "email": "m.aymeric@gmail.com"
+        }
+    ],
+    "require": {
+        "google/apiclient": "^2.2",
+        "filp/whoops": "^2.1",
+        "sunra/dbug": "^0.2.1"
+    }
+}
