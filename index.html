@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta property="og:image" content="assets/img/logo.jpg" />
+	<base href="/">
+	<title>MyNoise</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	<meta name="google" content="notranslate">
+	<meta name="title" content="MyNoise - Free music, videoclips and lyrics without waits or ads!!" />
+	<meta name="description" content="MyNoise provides music, videoclips and lyrics for free! Albums, artists, lyrics, playlists, youtube video. Share your playlists with your friends. Information about artists and related artists all in one place absolutely free without waits." />
+	<meta name="keywords" content="Music, Playlist, Artist, Albums, Similar artists, tracks, Video, Videoclips, Lyrics, Stream, Free music, Free stream video, Music videos free," />
+	<style>
+	#splash,[ng-cloak]{display:none}#splash,.inner{position:absolute}[ng-cloak]#splash{display:flex!important}#splash{top:0;left:0;width:100%;height:100%;z-index:9999;justify-content:center;align-items:center}#splash-spinner{display:block!important;width:120px;height:120px;border-radius:50%;perspective:800px}.inner{box-sizing:border-box;width:100%;height:100%;border-radius:50%}.inner.one{left:0;top:0;animation:rotate-one 1s linear infinite;border-bottom:3px solid #84BD00}.inner.two{right:0;top:0;animation:rotate-two 1s linear infinite;border-right:3px solid #84BD00}.inner.three{right:0;bottom:0;animation:rotate-three 1s linear infinite;border-top:3px solid #84BD00}@keyframes  rotate-one{0%{transform:rotateX(35deg) rotateY(-45deg) rotateZ(0)}100%{transform:rotateX(35deg) rotateY(-45deg) rotateZ(360deg)}}@keyframes  rotate-two{0%{transform:rotateX(50deg) rotateY(10deg) rotateZ(0)}100%{transform:rotateX(50deg) rotateY(10deg) rotateZ(360deg)}}@keyframes  rotate-three{0%{transform:rotateX(35deg) rotateY(55deg) rotateZ(0)}100%{transform:rotateX(35deg) rotateY(55deg) rotateZ(360deg)}}
+	</style>
+	<link href='https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,600,700' rel='stylesheet' type='text/css'>
+	<!-- build:css assets/css/style.min.css -->
+	<link rel="stylesheet" href="/assets/bower/perfect-scrollbar/css/perfect-scrollbar.css">
+	<link rel="stylesheet" href="/assets/css/styles.css">
+	<!-- endbuild -->
+</head>
+<body ng-app="app" global-dropdown-close ng-controller="AppController">
+	<div id="splash" ng-cloak>
+		<div id="splash-spinner">
+			<div class="inner one"></div>
+			<div class="inner two"></div>
+			<div class="inner three"></div>
+		</div>
+	</div>
+	<div ui-view="full" id="full-page-view"></div>
+	<div class="app-container" ng-class="{ visible: !shouldPlayerControlsBeHidden() }">
+		<section class="page-container" ng-cloak>
+			<section id="left-panel" class="togglable-sidebar" ng-class="{ closed: isPhone }">
+				<div ng-controller="PlaylistModifyController" class="left-panel-inner">
+					<div class="content ps-container" >
+						<a ui-sref="home" class="logo hidden-phone" href="/"><img ng-src="http://localhost/assets/img/custom_logo_light.png" alt="logo" src="http://localhost/assets/img/custom_logo_light.png"></a>
+						<div class="search-bar" abineguid="53E250B905134F77AD648C32B627A0B6">
+							<input placeholder="Search..." ng-model="search.query" ng-model-options="{ debounce: 400 }" ng-change="search.getResults(search.query)" on-enter="search.viewAllResults()" class="ng-pristine ng-untouched ng-valid" type="text">
+							<!-- ngIf: search.ajaxInProgress -->
+							<!-- ngIf: !search.ajaxInProgress && search.query.length -->
+						</div>
+						<div class="main-menu">
+							<!-- ngIf: isPhone -->
+							<div class="menu-item active" ui-sref="top-albums" ui-sref-active="active" href="/top-albums"><i class="icon icon-thumbs-up"></i> Popular Albums</div>
+							<div class="menu-item" ui-sref="popular-genres" ui-sref-active="active" href="/popular-genres"><i class="icon icon-tags"></i> Popular Genres</div>
+							<div class="menu-item" ui-sref="top-songs" ui-sref-active="active" href="/top-songs"><i class="icon icon-fire"></i> Top 50</div>
+							<div class="menu-item" ui-sref="new-releases" ui-sref-active="active" href="/new-releases"><i class="icon icon-cd"></i> New Releases</div>
+						</div>
+						<div class="divider"></div>
+						<!-- ngIf: users.current -->
+						<!-- ngIf: !users.current -->
+						<div class="login-btns" ng-if="!users.current">
+							<button class="primary login-btn" ui-sref="login" href="/login">Login</button>
+							<!-- ngIf: utils.getSetting('enableRegistration') -->
+							<button class="cancel register-btn" ui-sref="register" ng-if="utils.getSetting('enableRegistration')" href="/register">Register</button>
+							<!-- end ngIf: utils.getSetting('enableRegistration') -->
+						</div>
+						<!-- end ngIf: !users.current -->
+						<div class="your-music">
+							<h2>Your Music</h2>
+							<div class="menu-item" ui-sref="songs" ui-sref-active="active" href="/songs"><i class="icon icon-note"></i> Songs</div>
+							<div class="menu-item" ui-sref="albums" ui-sref-active="active" href="/albums"><i class="icon icon-cd"></i> Albums</div>
+							<div class="menu-item" ui-sref="artists" ui-sref-active="active" href="/artists"><i class="icon icon-mic"></i> Artists</div>
+						</div>
+						<div class="divider"></div>
+						<div class="playlists-container">
+							<div class="playlists">
+								<h2>Playlists <i class="icon icon-plus" tooltips="" tooltip-title="New Playlist" ng-click="openNewPlaylistModal()"></i></h2>
+								<div class="playlists-list">
+									<!-- ngRepeat: playlist in playlists.all -->
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="current-track ng-hide" ng-show="player.currentTrack" ng-controller="ExternalPlayerControlsController"><img ng-src="http://localhost/assets/images/album-no-image.png" src="http://localhost/assets/images/album-no-image.png">
+						<div class="info">
+							<div class="track-name" title=""></div>
+							<div class="artist-name">
+								<div class="artists" artists="player.currentTrack.artists">
+									<!-- ngRepeat: name in artists -->
+								</div>
+							</div>
+						</div>
+						<div class="add-remove" ng-class="{ saved: trackSaved(player.currentTrack) }"><i class="icon icon-plus add-track" ng-click="addTrack(player.currentTrack)"></i> <i class="icon icon-cancel-1 remove-track" ng-click="removeTrack(player.currentTrack)"></i> <i class="icon icon-ok track-added" ng-click="removeTrack(player.currentTrack)"></i></div>
+					</div>
+				</div>
+			</section>
+			<div class="search-panel-backdrop hidden" ng-if="searchPanelNeeded">
+				<div class="search-panel ps-container" >
+					<div class="view-all" ng-click="search.viewAllResults()">View All Results... <i class="icon icon-right-open"></i></div>
+					<!-- ngIf: search.results.artists.length -->
+					<!-- ngIf: search.results.tracks.length -->
+					<!-- ngIf: search.results.albums.length -->
+					<!-- ngIf: search.results.playlists.length -->
+					<!-- ngIf: search.results.users.length -->
+				</div>
+			</div>
+			<div class="middle-view">
+				<nav class="mobile-nav" ng-class="{ show: isPhone }">
+					<div class="toggle-icon" sidebar-toggler><i class="icon icon-menu"></i></div>
+					<div class="state-name">{{ getCurrentStateName() }}</div>
+					<div class="mobile-search-bar">
+						<i class="icon icon-search"></i>
+						<input type="text" class="mobile-search-bar" ng-model="search.query" ng-model-options="{ debounce: 400 }" ng-change="search.getResults(search.query)">
+						<i class="icon icon-spin6 spin search-bar-spinner" ng-if="search.ajaxInProgress"></i>
+					</div>
+				</nav>
+				<div ui-view="" id="main-view">
+					<div class="scroll-container ps-container" lazy-img-container="">
+						<div class="page-shadow albums-page home-page" ng-controller="TopAlbumsController">
+							<!-- ngIf: ad1 -->
+							<div class="filter-bar">
+								<div class="dropdown-container sort">Popular Albums</div>
+								<div class="filter hidden-phone" abineguid="FAC4DC86F86D4F9683CD25FCAEAE5453">
+									<input ng-model="params.query" placeholder="Filter..." class="ng-pristine ng-untouched ng-valid" type="text">
+									<i class="icon icon-search"></i>
+								</div>
+							</div>
+							<section class="albums hover-overlay">
+								<!-- ngRepeat: album in topAlbums | filter:{name:params.query} as sortedAlbums -->
+								<figure class="album"  context-menu-item="album" ng-repeat="album in topAlbums | filter:{name:params.query} as sortedAlbums">
+									<div class="image">
+										<img lazy-img="https://i.scdn.co/image/487bf17160e944c29ea63192a2655c0b808aee8f" ng-src="{{ album.image }}" alt="{{ album.name }}" src="https://i.scdn.co/image/487bf17160e944c29ea63192a2655c0b808aee8f">
+										<div class="overlay">
+											<i class="icon icon-play play" ng-click="playAlbum(album)"></i>
+										</div>
+									</div>
+									<figcaption>
+										<a class="album-name" ng-href="album({artistName:utils.encodeUrlParam(album.artist.name), name:utils.encodeUrlParam(album.name), id:album.id})">{{ album.name }}</a>
+										<!-- ngIf: album.artist --><a class="artist-name" ng-if="album.artist" ng-href="artist({ name: utils.encodeUrlParam(album.artist.name), id:album.artist.id })">{{ album.artist.name }}</a>
+										<!-- end ngIf: album.artist -->
+									</figcaption>
+								</figure>
+								<!-- end ngRepeat: album in topAlbums | filter:{name:params.query} as sortedAlbums -->
+							</section>
+							<!-- ngIf: sortedAlbums && ! sortedAlbums.length -->
+							<!-- ngIf: ad2 -->
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="right-panel" ng-class="{ closed: !queuePanelStatus.open, 'player-visible': utils.getSetting('show_youtube_player') }" class="closed player-visible">
+				<section class="queue ps-container" lazy-img-container="">
+					<!-- ngRepeat: track in player.queue track by track.identifier -->
+
+				</section>
+			</div>
+			<div class="lyrics-container hidden" lyrics-container>
+				<div class="backdrop"></div>
+				<div class="modal-inner-container">
+					<div id="lyrics-panel" class="scroll-container" pretty-scrollbar></div>
+					<div class="close-lyrics-icon"><i class="icon icon-cancel"></i></div>
+				</div>
+			</div>
+			<div class="player-container hidden" video-container ng-class="{ show: utils.getSetting('show_youtube_player') && ! isPhone }">
+				<div class="modal-inner-container video-inner-container">
+					<div id="player"></div>
+					<div class="yt-overlay" ng-if="utils.getSetting('block_youtube_embed_clicks')"></div>
+					<div class="close-lyrics-icon"><i class="icon icon-cancel"></i></div>
+					<div class="toggle-fullscreen" ng-if="utils.getSetting('show_fullscreen_button')"><i class="icon icon-resize-full"></i></div>
+				</div>
+				<div class="backdrop"></div>
+			</div>
+			<div id="context-menu" class="hidden" context-menu ng-controller="ContextMenuController">
+				<div class="header">
+					<div class="image"></div>
+					<div class="info">
+						<div class="name"></div>
+						<div class="sub-name"></div>
+					</div>
+				</div>
+				<div class="body">
+					<add-to-playlist class="slide-out"></add-to-playlist>
+				</div>
+			</div>
+		</section>
+		<section id="player-controls" style="touch-action: pan-y; -moz-user-select: none;">
+			<div class="buttons"><i class="icon icon-to-start prev"></i>
+				<!-- ngIf: !player.loadingTrack && !player.isPlaying --><i class="icon icon-play toggle-play" ng-if="!player.loadingTrack &amp;&amp; !player.isPlaying"></i>
+				<!-- end ngIf: !player.loadingTrack && !player.isPlaying -->
+				<!-- ngIf: !player.loadingTrack && player.isPlaying -->
+				<!-- ngIf: player.loadingTrack --><i class="icon icon-to-end next"></i></div>
+				<!-- ngIf: isPhone -->
+				<div class="controls-toggler"><i class="icon icon-dot-3" sidebar-toggler=".buttons.right"></i></div>
+				<div class="progress-container">
+					<div class="elapsed-time hidden-phone">0:00</div>
+					<div class="progress-bar" style="touch-action: pan-y; -moz-user-select: none;">
+						<div class="elapsed"></div>
+						<div class="progress"></div>
+						<div class="handle"></div>
+					</div>
+					<div class="track-length hidden-phone">0:00</div>
+				</div>
+				<!-- ngIf: !utils.getSetting('hide_lyrics_button') -->
+				<div class="lyrics hidden-phone disabled" ng-class="{ 'showing-lyrics': player.isShowingLyrics, disabled: !player.currentTrack }" ng-if="!utils.getSetting('hide_lyrics_button')">Lyrics</div>
+				<!-- end ngIf: !utils.getSetting('hide_lyrics_button') -->
+				<div class="buttons right" ng-class="{ closed: isPhone }">
+					<!-- ngIf: !utils.getSetting('hide_video_button') --><i class="icon icon-video toggle-video disabled" ng-class="{ disabled: !player.currentTrack }" ng-if="!utils.getSetting('hide_video_button')"></i>
+					<!-- end ngIf: !utils.getSetting('hide_video_button') --><i class="icon icon-menu toggle-queue"></i> <i class="icon icon-shuffle-1 shuffle" ng-class="{ shuffling: player.isShuffling }"></i>
+					<div class="repeat" ng-class="{ 'repeating-one': player.isRepeatingOne, repeating: player.isRepeating}"><i class="icon icon-loop"></i></div>
+					<div class="volume-container" volume-controls=""><i class="icon icon-volume-up-1 volume" style="touch-action: pan-y; -moz-user-select: none;"></i>
+						<div class="volume-bar" style="touch-action: pan-y; -moz-user-select: none;">
+							<div class="volume-level" style="width: 30%;"></div>
+							<div class="volume-handle" style="left: 23.8611%;"></div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+		<!-- build:js assets/js/app.min.js -->
+		<script type="text/javascript" src="/assets/bower/angular/angular.min.js"></script>
+		<script type="text/javascript" src="/assets/bower/perfect-scrollbar/dist/perfect-scrollbar.js"></script>
+		<script type="text/javascript" src="/assets/js/vars.js"></script>
+		<script type="text/javascript" src="/assets/js/core.js"></script>
+		<!-- endbuild -->
+	</body>
+	</html>

@@ -5,6 +5,13 @@ composer.lock
 # Bower
 assets/bower/
 
+# Gulp
+/dist/
+
+# Node
+node_modules/
+package-lock.json
+
 # Project files
-js/core.min.js
-js/core-save.js
+assets/js/core.min.js
+assets/js/core-save.js
