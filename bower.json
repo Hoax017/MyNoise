@@ -1,0 +1,27 @@
+{
+  "name": "MyNoise",
+  "homepage": "https://github.com/Hoax017/MyNoise",
+  "authors": [
+    "Hoax017 <m.aymeric@gmail.com>"
+  ],
+  "description": "Stream music for free",
+  "main": "",
+  "keywords": [
+    "Stream",
+    "music",
+    "for",
+    "free"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "perfect-scrollbar": "utatti-perfect-scrollbar#^1.2.0"
+  }
+}

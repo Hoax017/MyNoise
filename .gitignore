@@ -1,0 +1,10 @@
+# Composer
+/vendor/
+composer.lock
+
+# Bower
+assets/bower/
+
+# Project files
+js/core.min.js
+js/core-save.js

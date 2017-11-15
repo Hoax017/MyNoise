@@ -1,40 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta property="og:image" content="img/MyNoise.jpg" />
-	<meta name="keywords" content="Music, Playlist, Artist, Albums, Similar artists, tracks, Video, Videoclips, Lyrics, Stream, Free music, Free stream video, Music videos free," />
+	<meta property="og:image" content="assets/img/logo.jpg" />
 	<base href="/">
 	<title>MyNoise</title>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-	<meta name="fragment" content="!">
 	<meta name="google" content="notranslate">
 	<meta name="title" content="MyNoise - Free music, videoclips and lyrics without waits or ads!!" />
 	<meta name="description" content="MyNoise provides music, videoclips and lyrics for free! Albums, artists, lyrics, playlists, youtube video. Share your playlists with your friends. Information about artists and related artists all in one place absolutely free without waits." />
+	<meta name="keywords" content="Music, Playlist, Artist, Albums, Similar artists, tracks, Video, Videoclips, Lyrics, Stream, Free music, Free stream video, Music videos free," />
 	<style>
 	#splash,[ng-cloak]{display:none}#splash,.inner{position:absolute}[ng-cloak]#splash{display:flex!important}#splash{top:0;left:0;width:100%;height:100%;z-index:9999;justify-content:center;align-items:center}#splash-spinner{display:block!important;width:120px;height:120px;border-radius:50%;perspective:800px}.inner{box-sizing:border-box;width:100%;height:100%;border-radius:50%}.inner.one{left:0;top:0;animation:rotate-one 1s linear infinite;border-bottom:3px solid #84BD00}.inner.two{right:0;top:0;animation:rotate-two 1s linear infinite;border-right:3px solid #84BD00}.inner.three{right:0;bottom:0;animation:rotate-three 1s linear infinite;border-top:3px solid #84BD00}@keyframes  rotate-one{0%{transform:rotateX(35deg) rotateY(-45deg) rotateZ(0)}100%{transform:rotateX(35deg) rotateY(-45deg) rotateZ(360deg)}}@keyframes  rotate-two{0%{transform:rotateX(50deg) rotateY(10deg) rotateZ(0)}100%{transform:rotateX(50deg) rotateY(10deg) rotateZ(360deg)}}@keyframes  rotate-three{0%{transform:rotateX(35deg) rotateY(55deg) rotateZ(0)}100%{transform:rotateX(35deg) rotateY(55deg) rotateZ(360deg)}}
-</style>
-<link rel="stylesheet" id="main-stylesheet" href="css/styles.css">
-<link rel="stylesheet" id="main-stylesheet" href="asset/css/perfect-scrollbar.css">
-<link href='https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,600,700' rel='stylesheet' type='text/css'>
-<link rel="apple-touch-icon" sizes="57x57" href="favicons/apple-icon-57x57.png">
-<link rel="apple-touch-icon" sizes="60x60" href="favicons/apple-icon-60x60.png">
-<link rel="apple-touch-icon" sizes="72x72" href="favicons/apple-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="76x76" href="favicons/apple-icon-76x76.png">
-<link rel="apple-touch-icon" sizes="114x114" href="favicons/apple-icon-114x114.png">
-<link rel="apple-touch-icon" sizes="120x120" href="favicons/apple-icon-120x120.png">
-<link rel="apple-touch-icon" sizes="144x144" href="favicons/apple-icon-144x144.png">
-<link rel="apple-touch-icon" sizes="152x152" href="favicons/apple-icon-152x152.png">
-<link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-icon-180x180.png">
-<link rel="icon" type="image/png" sizes="192x192" href="favicons/android-icon-192x192.png">
-<link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="96x96" href="favicons/favicon-96x96.png">
-<link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
-<link rel="manifest" href="favicons/manifest.json">
-<meta name="msapplication-TileColor" content="#ffffff">
-<meta name="msapplication-TileImage" content="favicons/ms-icon-144x144.png">
-<meta name="theme-color" content="#ffffff">
+	</style>
+	<link href='https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,600,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" id="main-stylesheet" href="assets/bower/perfect-scrollbar/css/perfect-scrollbar.css">
+	<link rel="stylesheet" id="main-stylesheet" href="assets/css/styles.css">
 </head>
 <body ng-app="app" global-dropdown-close ng-controller="AppController">
 	<div id="splash" ng-cloak>
@@ -50,7 +32,7 @@
 			<section id="left-panel" class="togglable-sidebar" ng-class="{ closed: isPhone }">
 				<div ng-controller="PlaylistModifyController" class="left-panel-inner">
 					<div class="content ps-container" >
-						<a ui-sref="home" class="logo hidden-phone" href="/"><img ng-src="http://localhost/img/custom_logo_light.png" alt="logo" src="http://localhost/img/custom_logo_light.png"></a>
+						<a ui-sref="home" class="logo hidden-phone" href="/"><img ng-src="http://localhost/assets/img/custom_logo_light.png" alt="logo" src="http://localhost/assets/img/custom_logo_light.png"></a>
 						<div class="search-bar" abineguid="53E250B905134F77AD648C32B627A0B6">
 							<input placeholder="Search..." ng-model="search.query" ng-model-options="{ debounce: 400 }" ng-change="search.getResults(search.query)" on-enter="search.viewAllResults()" class="ng-pristine ng-untouched ng-valid" type="text">
 							<!-- ngIf: search.ajaxInProgress -->
@@ -237,7 +219,7 @@
 				version: "2.0.4",
 			}
 		</script>
-		<script src="asset/perfect-scrollbar-1.2.0/dist/perfect-scrollbar.js"></script>
-		<script src="js/core.js"></script>
+		<script src="assets/bower/perfect-scrollbar/dist/perfect-scrollbar.js"></script>
+		<script src="assets/js/core.js"></script>
 	</body>
 	</html>
